@@ -20,8 +20,7 @@
                                 'type' => 'image/vnd.microsoft.icon',
                                 'href' => $this->basePath() . '/img/favicon.ico'
                             ])
-            ->prependStylesheet($this->basePath('css/style.css'))
-            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->prependStylesheet($this->basePath('build/main.css'))
 ?>
 
         <!-- Scripts -->
@@ -71,6 +70,6 @@
             </footer>
         </div>
         <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js')) ?>
+            ->prependFile($this->basePath('build/main.js')) ?>
     </body>
 </html>
