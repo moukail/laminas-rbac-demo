@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Application;
+namespace Admin;
 
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -11,20 +11,10 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 return [
     'router' => [
         'routes' => [
-            'home' => [
+            'admin' => [
                 'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/',
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
-            'application' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/admin',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -46,7 +36,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             //'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'admin/index/index' => __DIR__ . '/../view/admin/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],

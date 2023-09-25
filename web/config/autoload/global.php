@@ -13,5 +13,8 @@
  */
 
 return [
-    // ...
+    'module_layouts' => [
+        'Application' => 'layout/application.phtml',
+        'Dashboard' => 'layout/dashboard.phtml',
+    ],
 ];

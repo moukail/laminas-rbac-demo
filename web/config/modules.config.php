@@ -21,4 +21,7 @@ return [
     'DoctrineORMModule',
     'Laminas\DeveloperTools',
     'Application',
+    'Dashboard',
+    'Login',
+    'Admin',
 ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Application;
+namespace Dashboard;
 
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
@@ -27,7 +27,7 @@ class Module
             if (isset($config['module_layouts'][$moduleNamespace])) {
                 $controller->layout($config['module_layouts'][$moduleNamespace]);
             }
-            $controller->layout('layout/application.phtml');
+            $controller->layout('layout/dashboard.phtml');
         }, 100);
 
         $moduleRouteListener = new ModuleRouteListener();
