@@ -1,0 +1,3 @@
+laminas.dev.local:80 {
+  reverse_proxy laminas-web:8000
+}
