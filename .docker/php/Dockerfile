@@ -3,8 +3,8 @@ FROM php:8.2-fpm-alpine3.18
 
 ENV TIMEZONE 'Europe/Amsterdam'
 
-RUN apk --update --no-cache add bash wget gcc g++ make autoconf linux-headers rabbitmq-c-dev rabbitmq-c libsodium-dev openssh git rsync
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN apk --update --no-cache add bash wget gcc g++ make autoconf linux-headers icu-dev rabbitmq-c-dev rabbitmq-c libsodium-dev openssh git rsync
+RUN docker-php-ext-install -j$(nproc) pdo_mysql intl
 
 RUN pecl install amqp redis libsodium && docker-php-ext-enable amqp redis opcache
 

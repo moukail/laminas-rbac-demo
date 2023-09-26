@@ -14,8 +14,8 @@ cd ./web
 #symfony composer config allow-plugins.symfony/runtime true
 symfony composer require php:^8.2.0
 
-composer require --no-interaction laminas/laminas-cli laminas/laminas-session
-composer require --no-interaction doctrine/doctrine-orm-module --with-all-dependencies
+composer require --no-interaction laminas/laminas-cli laminas/laminas-session laminas/laminas-i18n
+composer require --no-interaction doctrine/migrations doctrine/doctrine-orm-module --with-all-dependencies
 echo "-------------------------------------------------------------------"
 echo "-               require dev packages                              -"
 echo "-------------------------------------------------------------------"

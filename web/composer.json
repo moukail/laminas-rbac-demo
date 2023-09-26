@@ -1,14 +1,5 @@
 {
-    "name": "laminas/laminas-mvc-skeleton",
-    "description": "Laminas MVC Skeleton Application",
     "type": "project",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "laminas",
-        "mvc",
-        "skeleton",
-        "framework"
-    ],
     "require": {
         "php": "^8.2.0",
         "laminas/laminas-component-installer": "^3.2",
@@ -17,7 +8,9 @@
         "laminas/laminas-mvc": "^3.6.0",
         "laminas/laminas-cli": "^1.8",
         "laminas/laminas-session": "^2.16",
-        "doctrine/doctrine-orm-module": "^6.0"
+        "laminas/laminas-i18n": "^2.23",
+        "doctrine/doctrine-orm-module": "^6.0",
+        "doctrine/migrations": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -53,7 +46,9 @@
         ],
         "test": "vendor/bin/phpunit",
         "static-analysis": "vendor/bin/psalm --shepherd --stats",
-        "doctrine": "./vendor/bin/doctrine-module"
+        "doctrine": "./vendor/bin/doctrine-module",
+        "doctrine:migrations:diff": "./vendor/bin/doctrine-module migrations:diff",
+        "doctrine:migrations:list": "./vendor/bin/doctrine-module migrations:list"
     },
     "scripts-descriptions": {
         "clear-config-cache": "Clears merged config cache. Required for config changes to be applied.",

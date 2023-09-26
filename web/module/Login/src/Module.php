@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Login;
 
+use Laminas\Authentication\AuthenticationService;
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
 
@@ -32,5 +33,16 @@ class Module
 
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+    }
+
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                AuthenticationService::class => function ($serviceManager) {
+                    return $serviceManager->get('doctrine.authenticationservice.orm_default');
+                },
+            ],
+        ];
     }
 }

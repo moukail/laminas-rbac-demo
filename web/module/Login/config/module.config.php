@@ -25,7 +25,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Factory\IndexControllerFactory::class,
         ],
     ],
     'view_manager' => [
@@ -42,17 +42,6 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
-        ],
-    ],
-
-    'doctrine' => [
-        'authentication' => [
-            'orm_default' => [
-                'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Application\Entity\User',
-                'identity_property' => 'email',
-                'credential_property' => 'password',
-            ],
         ],
     ],
 ];

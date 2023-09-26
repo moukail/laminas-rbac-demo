@@ -62,39 +62,4 @@ return [
     // Initial configuration with which to seed the ServiceManager.
     // Should be compatible with Laminas\ServiceManager\Config.
     // 'service_manager' => [],
-
-    'doctrine' => [
-        'connection' => [
-            // default connection name
-            'orm_default' => [
-                'driverClass' => \Doctrine\DBAL\Driver\PDO\MySQL\Driver::class,
-                'params' => [
-                    'host'     => getenv('DATABASE_HOST'),
-                    'port'     => getenv('DATABASE_PORT'),
-                    'user'     => getenv('DATABASE_USER'),
-                    'password' => getenv('DATABASE_PASSWORD'),
-                    'dbname'   => getenv('DATABASE_NAME'),
-                ],
-            ],
-        ],
-        'driver' => [
-            // defines an annotation driver with two paths, and names it `my_annotation_driver`
-            'application_driver' => [
-                'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
-                'cache' => 'array',
-                'paths' => [
-                    __DIR__ . '/../../module/Application/src/Entity',
-                ],
-            ],
-
-            // default metadata driver, aggregates all other drivers into a single one.
-            // Override `orm_default` only if you know what you're doing
-            'orm_default' => [
-                'drivers' => [
-                    // register `my_annotation_driver` for any entity under namespace `My\Namespace`
-                    'Application\Entity' => 'application_driver',
-                ],
-            ],
-        ],
-    ],
 ];

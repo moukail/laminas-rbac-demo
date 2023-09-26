@@ -28,11 +28,15 @@ class IndexController extends AbstractActionController
         $data = $this->getRequest()->getPost();
 
         $adapter = $this->authenticationService->getAdapter();
-        $adapter->setIdentity($data['username']);
+
+        $adapter->setIdentity($data['email']);
         $adapter->setCredential($data['password']);
         $authResult = $this->authenticationService->authenticate();
 
         if ($authResult->isValid()) {
+            $identity = $authResult->getIdentity();
+            $this->authenticationService->getStorage()->write($identity);
+
             return $this->redirect()->toRoute('home');
         }
 
