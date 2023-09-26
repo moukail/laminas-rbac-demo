@@ -52,7 +52,8 @@
             "php -S 0.0.0.0:8080 -t public"
         ],
         "test": "vendor/bin/phpunit",
-        "static-analysis": "vendor/bin/psalm --shepherd --stats"
+        "static-analysis": "vendor/bin/psalm --shepherd --stats",
+        "doctrine": "./vendor/bin/doctrine-module"
     },
     "scripts-descriptions": {
         "clear-config-cache": "Clears merged config cache. Required for config changes to be applied.",

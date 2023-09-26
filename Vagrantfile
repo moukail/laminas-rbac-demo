@@ -4,8 +4,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: ".vagrant/bootstrap.sh"
   config.vm.synced_folder '.', projectDirectory
 
-  config.vm.network :private_network, ip: '192.168.2.50', auto_network: true
-  config.vm.network :forwarded_port, guest: 80, host: 8080, id: "web"
+  #config.vm.network :private_network, ip: '192.168.2.50', auto_network: true
+  config.vm.network :forwarded_port, guest: 8000, host: 8080, id: "web"
   #config.vm.hostname = "moukafih.nl"
 
   config.ssh.insert_key = false

@@ -35,7 +35,7 @@ services:
 
   proxy:
     image: caddy:2.6-alpine
-    container_name: reverse_proxy
+    container_name: laminas_reverse_proxy
     ports:
       - 80:80
     volumes:
