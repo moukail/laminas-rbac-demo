@@ -4,26 +4,18 @@
 if [ ! -d "./public" ]; then
   . /home/install.sh
 fi
-
+echo "--------------------------------------------------------------------"
+echo "-                        nodejs                                    -"
+echo "--------------------------------------------------------------------"
 #rm -rf node_modules package-lock.json
-#npm install --silent --no-progress --non-interactive
-#npm audit fix
-#npm install --global browser-sync
-#npm run dev
+yarn install
 
-#export APP_ENV=dev
-#rm -rf var vendor composer.lock symfony.lock
-#cp .env.local .env
 echo "8.2" > .php-version
 
-#symfony --no-interaction self:update
-#symfony self:version
-#symfony self:cleanup
-
-echo "-----------------------------------------------------------------------------------------------------------------"
-echo "-                                                composer                                                       -"
-echo "-----------------------------------------------------------------------------------------------------------------"
-symfony composer update --no-interaction #--no-plugins --no-scripts
+echo "--------------------------------------------------------------------"
+echo "-                        composer                                  -"
+echo "--------------------------------------------------------------------"
+symfony composer update --no-interaction
 symfony composer -n check-platform-reqs
 
 echo "-------------------------------------------------------------------"
@@ -97,7 +89,7 @@ symfony check:security
 symfony console about
 #echo | symfony server:ca:install
 #symfony serve --p12=/var/www/certs/localhost.p12
-symfony serve
+symfony serve --daemon
 
 echo "-------------------------------------------------------------------"
 echo "-                        testing                                  -"
@@ -108,6 +100,6 @@ echo "-------------------------------------------------------------------"
 echo "-------------------------------------------------------------------"
 echo "-                        yarn watch                               -"
 echo "-------------------------------------------------------------------"
-#symfony run -d npm run watch
+yarn watch
 
 tail -f /dev/null
