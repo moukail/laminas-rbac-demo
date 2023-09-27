@@ -44,14 +44,14 @@ return [
                     'execution_time_column_name' => 'executionTime',
                 ],
                 'migrations_paths' => [
-                    __DIR__ . '/../../migrations',
+                    'Application' => __DIR__ . '/../../migrations',
                 ], // an array of namespace => path
                 'migrations' => [
                 //    'Application\Migrations',
                 ], // an array of fully qualified migrations
                 'all_or_nothing' => false,
                 'check_database_platform' => true,
-                'organize_migrations' => 'year', // year or year_and_month
+                //'organize_migrations' => 'year', // year or year_and_month
                 'custom_template' => null,
             ],
         ],
@@ -61,6 +61,7 @@ return [
                 'identity_class' => 'Application\Entity\User',
                 'identity_property' => 'email',
                 'credential_property' => 'password',
+                'credential_callable' => 'Application\Entity\User::verifyHashedPassword'
             ],
         ],
     ]

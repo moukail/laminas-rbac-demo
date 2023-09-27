@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Command\MyCommand;
+use Application\Factory\MyCommandFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -52,6 +54,16 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            MyCommand::class => MyCommandFactory::class,
+        ],
+    ],
+    'laminas-cli' => [
+        'commands' => [
+            'doctrine:fixtures:load' => MyCommand::class,
         ],
     ],
 ];

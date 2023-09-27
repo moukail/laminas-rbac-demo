@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController
             $identity = $authResult->getIdentity();
             $this->authenticationService->getStorage()->write($identity);
 
-            return $this->redirect()->toRoute('home');
+            return $this->redirect()->toRoute('dashboard');
         }
 
         return new ViewModel([

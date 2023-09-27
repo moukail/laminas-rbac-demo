@@ -7,6 +7,7 @@ namespace Login;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Login\Factory\MyRbacFactory;
 
 return [
     'router' => [
@@ -42,6 +43,11 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            MyRbac::class => MyRbacFactory::class,
         ],
     ],
 ];

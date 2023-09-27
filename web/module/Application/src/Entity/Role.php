@@ -6,9 +6,10 @@ use Application\Repository\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
-class Role
+class Role implements RoleInterface
 {
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_MANAGER = 'ROLE_MANAGER';
@@ -80,5 +81,30 @@ class Role
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function hasPermission(string $name): bool
+    {
+        // TODO: Implement hasPermission() method.
+    }
+
+    public function addChild(RoleInterface $child): void
+    {
+        // TODO: Implement addChild() method.
+    }
+
+    public function getChildren(): iterable
+    {
+        // TODO: Implement getChildren() method.
+    }
+
+    public function addParent(RoleInterface $parent): void
+    {
+        // TODO: Implement addParent() method.
+    }
+
+    public function getParents(): iterable
+    {
+        // TODO: Implement getParents() method.
     }
 }

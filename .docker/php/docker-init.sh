@@ -27,7 +27,7 @@ echo "-                        prepare the DB                           -"
 echo "-------------------------------------------------------------------"
 #symfony console doctrine:database:drop --if-exists --force
 symfony console doctrine:database:create --if-not-exists
-symfony console doctrine:migrations:migrate --no-interaction
+composer doctrine:migrations:migrate --no-interaction
 symfony console doctrine:fixtures:load --no-interaction -vvv
 
 #symfony console doctrine:database:drop --if-exists --force
