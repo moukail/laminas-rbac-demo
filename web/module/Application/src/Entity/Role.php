@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Laminas\Permissions\Rbac\RoleInterface;
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
-class Role implements RoleInterface
+class Role
 {
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_MANAGER = 'ROLE_MANAGER';
