@@ -20,7 +20,7 @@ echo "-------------------------------------------------------------------"
 echo "-               require dev packages                              -"
 echo "-------------------------------------------------------------------"
 
-symfony composer require --dev --no-interaction laminas/laminas-developer-tools
+symfony composer require --dev --no-interaction laminas/laminas-developer-tools doctrine/data-fixtures
 
 rm -rf .git
 cd ..
