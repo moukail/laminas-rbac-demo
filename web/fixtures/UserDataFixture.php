@@ -31,7 +31,7 @@ class UserDataFixture implements FixtureInterface
         $securePass = $bcrypt->create('pass_1234');
 
         $user = (new User())
-            ->setEmail('ismail@jcid.nl')
+            ->setEmail('ismail@moukafih.nl')
             ->setPassword($securePass)
             ->setFirstName('Ismail')
             ->setLastName('Moukafih')

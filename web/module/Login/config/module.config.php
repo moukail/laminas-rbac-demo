@@ -18,7 +18,17 @@ return [
                     'route'    => '/login',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'logout',
                     ],
                 ],
             ],

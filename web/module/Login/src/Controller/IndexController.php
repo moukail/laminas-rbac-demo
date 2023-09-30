@@ -14,7 +14,7 @@ class IndexController extends AbstractActionController
     public function __construct(private readonly AuthenticationService $authenticationService)
     {}
 
-    public function indexAction()
+    public function loginAction()
     {
         $form = new LoginForm();
         $form->get('submit')->setValue('Add');
@@ -43,5 +43,13 @@ class IndexController extends AbstractActionController
         return new ViewModel([
             'error' => 'Your authentication credentials are not valid',
         ]);
+    }
+
+    public function logoutAction()
+    {
+        //$identity = $this->authenticationService->getIdentity();
+        //$this->getEventManager()->trigger(AccessEvent::EVENT_LOGOUT, null, ['email' => $identity->getEmail()]);
+        $this->authenticationService->clearIdentity();
+        return $this->redirect()->toRoute('login');
     }
 }

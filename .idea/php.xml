@@ -86,6 +86,10 @@
       <path value="$PROJECT_DIR$/web/vendor/symfony/stopwatch" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/var-exporter" />
       <path value="$PROJECT_DIR$/web/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/web/vendor/laminas/laminas-math" />
+      <path value="$PROJECT_DIR$/web/vendor/laminas/laminas-crypt" />
+      <path value="$PROJECT_DIR$/web/vendor/laminas/laminas-permissions-acl" />
+      <path value="$PROJECT_DIR$/web/vendor/laminas/laminas-permissions-rbac" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

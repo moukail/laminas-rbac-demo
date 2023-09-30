@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dashboard\Controller;
 
+use Exception;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -17,12 +18,16 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         if (!$this->authenticationService->hasIdentity()) {
-            throw new \HttpException("You to log in", 401);
+            return $this->redirect()->toRoute('login');
+            //throw new Exception("You have to log in", 401);
         }
 
         // Identity exists; get it
         $identity = $this->authenticationService->getIdentity();
-        $this->rbac->isGranted($identity->getRole(), 'view.dashboard');
+        if(!$this->rbac->isGranted($identity->getRole()->getName(), 'VIEW_DASHBOARD')) {
+            return $this->redirect()->toRoute('login');
+            //throw new Exception("You don't have permission", 403);
+        }
 
         return new ViewModel();
     }

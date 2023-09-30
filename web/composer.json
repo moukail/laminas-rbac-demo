@@ -12,7 +12,6 @@
         "doctrine/doctrine-orm-module": "^6.0",
         "doctrine/migrations": "^3.6",
         "laminas/laminas-crypt": "^3.10",
-        "laminas/laminas-permissions-acl": "^2.15",
         "laminas/laminas-permissions-rbac": "^3.5"
     },
     "require-dev": {

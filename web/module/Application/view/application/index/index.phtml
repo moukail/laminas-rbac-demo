@@ -2,6 +2,9 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Laminas\Authentication\AuthenticationService;
+
 ?>
 
 <!-- Custom styles for this template -->
@@ -64,14 +67,21 @@
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="<?= $this->url('home') ?>">Home</a>
                 <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
                 <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
-
-                <a class="nav-link fw-bold py-1 px-0" href="/login">Login</a>
-
+                <?php
+                $auth = new AuthenticationService();
+                if (!$auth->hasIdentity()){
+                ?>
+                <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('login') ?>">Login</a>
+                <?php } ?>
+                <?php
+                $auth = new AuthenticationService();
+                if ($auth->hasIdentity()){
+                ?>
                 <a class="nav-link fw-bold py-1 px-0" href="/dashboard">Dashboard</a>
                 <a class="nav-link fw-bold py-1 px-0" href="/user">Users</a>
                 <a class="nav-link fw-bold py-1 px-0" href="/role">Roles</a>
-                <a class="nav-link fw-bold py-1 px-0" href="/logout">Logout</a>
-
+                <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('logout') ?>">Logout</a>
+                <?php } ?>
             </nav>
         </div>
     </header>
