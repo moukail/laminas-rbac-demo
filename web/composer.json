@@ -12,7 +12,11 @@
         "doctrine/doctrine-orm-module": "^6.0",
         "doctrine/migrations": "^3.6",
         "laminas/laminas-crypt": "^3.10",
-        "laminas/laminas-permissions-rbac": "^3.5"
+        "laminas/laminas-permissions-rbac": "^3.5",
+        "doctrine/orm": "^2.16",
+        "doctrine/doctrine-bundle": "^2.10",
+        "symfony/console": "^6.3",
+        "laminas/laminas-mvc-plugin-flashmessenger": "^1.9"
     },
     "require-dev": {
         "laminas/laminas-developer-tools": "^2.8",
@@ -23,12 +27,25 @@
             "Application\\": "module/Application/src/",
             "Dashboard\\": "module/Dashboard/src/",
             "Login\\": "module/Login/src/",
-            "Admin\\": "module/Admin/src/"
+            "Admin\\": "module/Admin/src/",
+            "User\\": "module/User/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "ApplicationTest\\": "module/Application/test/"
+        }
+    },
+    "extra": {
+        "laminas": {
+            "component": "laminas/laminas-mvc",
+            "config-provider": "Laminas\\Mvc\\ConfigProvider"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "laminas/laminas-component-installer": true,
+            "laminas/laminas-skeleton-installer": true
         }
     },
     "scripts": {
@@ -56,7 +73,8 @@
         "doctrine:migrations:diff": "./vendor/bin/doctrine-module migrations:diff",
         "doctrine:migrations:migrate": "./vendor/bin/doctrine-module migrations:migrate",
         "doctrine:database:create": "./vendor/bin/doctrine-module orm:schema-tool:create",
-        "doctrine:migrations:list": "./vendor/bin/doctrine-module migrations:list"
+        "doctrine:migrations:list": "./vendor/bin/doctrine-module migrations:list",
+        "doctrine:fixtures:load": "./vendor/bin/doctrine-module doctrine:fixtures:load"
     },
     "scripts-descriptions": {
         "clear-config-cache": "Clears merged config cache. Required for config changes to be applied.",
@@ -67,11 +85,5 @@
         "development-status": "Detail whether or not the application is in development mode.",
         "serve": "Start the built-in PHP web server and serve the application.",
         "test": "Run unit tests."
-    },
-    "config": {
-        "allow-plugins": {
-            "laminas/laminas-component-installer": true,
-            "laminas/laminas-skeleton-installer": true
-        }
     }
 }

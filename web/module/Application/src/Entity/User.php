@@ -138,4 +138,14 @@ class User
         ]);
         return $bcrypt->verify($passwordGiven, $user->getPassword());
     }
+
+    public function getArrayCopy(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'first_name' => $this->getFirstName(),
+            'last_name' => $this->getLastName(),
+        ];
+    }
 }

@@ -9,11 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Laminas\Permissions\Rbac\RoleInterface;
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
+#[ORM\Table(name: "roles")]
 class Role
 {
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_MANAGER = 'ROLE_MANAGER';
     const ROLE_USER = 'ROLE_USER';
+    const ROLE_GUEST = 'ROLE_GUEST';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -106,5 +108,13 @@ class Role
     public function getParents(): iterable
     {
         // TODO: Implement getParents() method.
+    }
+
+    public function getArrayCopy(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+        ];
     }
 }

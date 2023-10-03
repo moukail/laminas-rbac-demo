@@ -1,0 +1,53 @@
+<?= $this->partial('partial_header.phtml'); ?>
+
+<main class="flex-shrink-0">
+
+    <div class="container mt-5">
+        <h2>Edit User Profile</h2>
+
+        <?php
+        // Display form errors, if any
+        if ($form->getMessages()) {
+            echo $this->formMessages($form);
+        }
+        ?>
+
+        <?php
+        // Render the form
+        $form->setAttribute('action', $this->url('user-edit', ['id' => $user->getId()]));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        ?>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('role')); ?>
+            <?= $this->formSelect($form->get('role')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('first_name')); ?>
+            <?= $this->formInput($form->get('first_name')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('last_name')); ?>
+            <?= $this->formInput($form->get('last_name')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('email')); ?>
+            <?= $this->formInput($form->get('email')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('plainPassword')); ?>
+            <?= $this->formInput($form->get('plainPassword')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formSubmit($form->get('submit')); ?>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+<main

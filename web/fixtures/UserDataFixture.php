@@ -13,19 +13,37 @@ class UserDataFixture implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $permission = (new Permission())
-            ->setIdentifier('VIEW_DASHBOARD')
+        $viewDashboardPermission = (new Permission())
+            ->setIdentifier('dashboard')
             ->setLabel('View dashboard')
         ;
+        $manager->persist($viewDashboardPermission);
 
-        $manager->persist($permission);
-
-        $role = (new Role())
-            ->setName('ROLE_ADMIN')
-            ->addPermission($permission)
+        $userListPermission = (new Permission())
+            ->setIdentifier('user-index')
+            ->setLabel('User list')
         ;
+        $manager->persist($userListPermission);
 
-        $manager->persist($role);
+        $viewProfilePermission = (new Permission())
+            ->setIdentifier('user-profile')
+            ->setLabel('View profile')
+        ;
+        $manager->persist($viewProfilePermission);
+
+        $roleAdmin = (new Role())
+            ->setName(Role::ROLE_ADMIN)
+            ->addPermission($viewDashboardPermission)
+            ->addPermission($userListPermission)
+            ->addPermission($viewProfilePermission)
+        ;
+        $manager->persist($roleAdmin);
+
+        $roleUser = (new Role())
+            ->setName(Role::ROLE_USER)
+            ->addPermission($viewProfilePermission)
+        ;
+        $manager->persist($roleUser);
 
         $bcrypt = new Bcrypt();
         $securePass = $bcrypt->create('pass_1234');
@@ -35,7 +53,7 @@ class UserDataFixture implements FixtureInterface
             ->setPassword($securePass)
             ->setFirstName('Ismail')
             ->setLastName('Moukafih')
-            ->setRole($role)
+            ->setRole($roleAdmin)
         ;
 
         $manager->persist($user);

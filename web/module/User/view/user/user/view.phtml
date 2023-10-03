@@ -1,0 +1,22 @@
+<?= $this->partial('partial_header.phtml'); ?>
+
+<main class="flex-shrink-0">
+    <div class="container">
+
+        <?php foreach ($this->flashMessenger()->getSuccessMessages() as $message) : ?>
+            <div class="alert alert-success"><?= $message ?></div>
+        <?php endforeach; ?>
+
+        <?php foreach ($this->flashMessenger()->getErrorMessages() as $message) : ?>
+            <div class="alert alert-danger"><?= $message ?></div>
+        <?php endforeach; ?>
+
+        <h2 class="mt-5">User Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><?= $user->getFirstName(); ?> <?= $user->getLastName(); ?></h5>
+                <p class="card-text">Email: <?= $user->getEmail(); ?></p>
+            </div>
+        </div>
+    </div>
+</main>

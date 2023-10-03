@@ -17,29 +17,31 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       - database
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laminas.rule=Host(`laminas.app.localhost`)"
+      - "traefik.http.routers.laminas.tls=true"
     tty: true
 
   database:
     image: mysql:8.1
     container_name: $DATABASE_HOST
+    restart: unless-stopped
     ports:
       - $DATABASE_PORT
     expose:
       - $DATABASE_PORT
     volumes:
       - database:/var/lib/mysql
+      - ./certs:/etc/mysql/certs
       #- ./.docker/data:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=$DATABASE_NAME
-
-  proxy:
-    image: caddy:2.7-alpine
-    container_name: laminas_reverse_proxy
-    ports:
-      - 80:80
-    volumes:
-      - ./.docker/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - traefik_net
 
 volumes:
   database:
@@ -48,6 +50,5 @@ volumes:
     driver: local
 
 networks:
-  default:
-    name: moukail
-
+  traefik_net:
+    external: true

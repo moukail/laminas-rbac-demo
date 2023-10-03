@@ -17,25 +17,7 @@ class Module
         return $config;
     }
 
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function($e) {
-            $controller      = $e->getTarget();
-            $controllerClass = get_class($controller);
-            $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
-            $config          = $e->getApplication()->getServiceManager()->get('config');
-            if (isset($config['module_layouts'][$moduleNamespace])) {
-                $controller->layout($config['module_layouts'][$moduleNamespace]);
-            }
-            $controller->layout('layout/login.phtml');
-        }, 100);
-
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
-
-    public function getServiceConfig()
+    public function getServiceConfig(): array
     {
         return [
             'factories' => [
@@ -44,5 +26,28 @@ class Module
                 },
             ],
         ];
+    }
+
+    public function onBootstrap(MvcEvent $e): void
+    {
+        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager->getSharedManager()->attach(__NAMESPACE__, 'dispatch', [$this, 'layout'], 100);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+    }
+
+    public function layout(MvcEvent $e): void
+    {
+        $controller      = $e->getTarget();
+        $controllerClass = get_class($controller);
+        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+        $config          = $e->getApplication()->getServiceManager()->get('config');
+
+        if (isset($config['module_layouts'][$moduleNamespace])) {
+            $controller->layout($config['module_layouts'][$moduleNamespace]);
+        }
+
+        $controller->layout('layout/login.phtml');
     }
 }

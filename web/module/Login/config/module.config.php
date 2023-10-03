@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Login;
 
 use Laminas\Router\Http\Literal;
-use Laminas\Router\Http\Segment;
-use Laminas\ServiceManager\Factory\InvokableFactory;
-use Login\Factory\MyRbacFactory;
 
 return [
     'router' => [
         'routes' => [
-            'login' => [
+            'user-login' => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/login',
@@ -22,7 +19,7 @@ return [
                     ],
                 ],
             ],
-            'logout' => [
+            'user-logout' => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/logout',
@@ -53,11 +50,6 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
-        ],
-    ],
-    'service_manager' => [
-        'factories' => [
-            MyRbac::class => MyRbacFactory::class,
         ],
     ],
 ];

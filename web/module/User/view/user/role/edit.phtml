@@ -1,0 +1,37 @@
+<?= $this->partial('partial_header.phtml'); ?>
+
+<main class="flex-shrink-0">
+    <div class="container mt-5">
+        <h2>Edit Role</h2>
+
+        <?php
+        // Display form errors, if any
+        if ($form->getMessages()) {
+            echo $this->formMessages($form);
+        }
+        ?>
+
+        <?php
+        // Render the form
+        $form->setAttribute('action', $this->url('role-edit', ['id' => $role->getId()]));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        ?>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formInput($form->get('name')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('permissions')); ?>
+            <?= $this->formMultiCheckbox($form->get('permissions')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formSubmit($form->get('submit')); ?>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</main>

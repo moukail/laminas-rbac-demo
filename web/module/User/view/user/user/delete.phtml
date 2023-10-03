@@ -1,0 +1,20 @@
+<?= $this->partial('partial_header.phtml'); ?>
+
+<main class="flex-shrink-0">
+    <div class="container mt-5">
+        <h2>Delete Role</h2>
+
+        <?php
+        // Display confirmation message
+        echo '<p>Are you sure you want to delete the following user?</p>';
+        echo '<p><strong>Name:</strong> ' . $this->escapeHtml($user->getFirstName()) . ' ' . $this->escapeHtml($user->getLastName()) . '</p>';
+        ?>
+
+        <form method="post">
+            <div class="mb-3">
+                <input type="submit" name="confirmation" value="Yes" class="btn btn-danger">
+                <a href="<?= $this->url('user-index'); ?>" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>

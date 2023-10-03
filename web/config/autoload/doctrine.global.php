@@ -1,5 +1,7 @@
 <?php
 
+use Application\Command\DoctrineFixturesLoadCommand;
+
 return [
     'doctrine' => [
         'connection' => [

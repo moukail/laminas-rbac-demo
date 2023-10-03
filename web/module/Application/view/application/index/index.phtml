@@ -67,27 +67,41 @@ use Laminas\Authentication\AuthenticationService;
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="<?= $this->url('home') ?>">Home</a>
                 <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
                 <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
+
+                <?php if ($this->rbac()->isGranted('dashboard')) : ?>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('dashboard'); ?>">Dashboard</a>
+                <?php endif; ?>
+
+                <?php if ($this->rbac()->isGranted('user-index')) : ?>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('user-index'); ?>">Users</a>
+                <?php endif; ?>
+
+                <?php if ($this->rbac()->isGranted('role-index')) : ?>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('role-index'); ?>">Roles</a>
+                <?php endif; ?>
+
                 <?php
                 $auth = new AuthenticationService();
-                if (!$auth->hasIdentity()){
-                ?>
-                <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('login') ?>">Login</a>
-                <?php } ?>
-                <?php
-                $auth = new AuthenticationService();
-                if ($auth->hasIdentity()){
-                ?>
-                <a class="nav-link fw-bold py-1 px-0" href="/dashboard">Dashboard</a>
-                <a class="nav-link fw-bold py-1 px-0" href="/user">Users</a>
-                <a class="nav-link fw-bold py-1 px-0" href="/role">Roles</a>
-                <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('logout') ?>">Logout</a>
-                <?php } ?>
+                if (!$auth->hasIdentity()) : ?>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('user-login') ?>">Login</a>
+                <?php else : ?>
+                    <a class="nav-link fw-bold py-1 px-0" href="<?= $this->url('user-logout') ?>">Logout</a>
+                <?php endif; ?>
             </nav>
         </div>
     </header>
 
     <main class="px-3">
         <h1>Cover your page.</h1>
+
+        <?php if ($this->rbac()->isGranted('YOUR_PERMISSION')) : ?>
+            <!-- Display content accessible to users with 'YOUR_PERMISSION' -->
+            <p>You have permission to access this content.</p>
+        <?php else : ?>
+            <!-- Display content for users without 'YOUR_PERMISSION' -->
+            <p>You do not have permission to access this content.</p>
+        <?php endif; ?>
+
         <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
         <p class="lead">
             <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>

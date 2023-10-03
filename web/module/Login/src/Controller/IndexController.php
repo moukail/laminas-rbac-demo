@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Login\Controller;
 
+use Application\Entity\Role;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -33,16 +34,20 @@ class IndexController extends AbstractActionController
         $adapter->setCredential($data['password']);
         $authResult = $this->authenticationService->authenticate();
 
-        if ($authResult->isValid()) {
-            $identity = $authResult->getIdentity();
-            $this->authenticationService->getStorage()->write($identity);
+        if (!$authResult->isValid()) {
+            return new ViewModel([
+                'error' => 'Your authentication credentials are not valid',
+            ]);
+        }
 
+        $identity = $authResult->getIdentity();
+        $this->authenticationService->getStorage()->write($identity);
+
+        if ($identity->getRole()->getName() == Role::ROLE_ADMIN){
             return $this->redirect()->toRoute('dashboard');
         }
 
-        return new ViewModel([
-            'error' => 'Your authentication credentials are not valid',
-        ]);
+        return $this->redirect()->toRoute('user-profile');
     }
 
     public function logoutAction()
@@ -50,6 +55,6 @@ class IndexController extends AbstractActionController
         //$identity = $this->authenticationService->getIdentity();
         //$this->getEventManager()->trigger(AccessEvent::EVENT_LOGOUT, null, ['email' => $identity->getEmail()]);
         $this->authenticationService->clearIdentity();
-        return $this->redirect()->toRoute('login');
+        return $this->redirect()->toRoute('user-login');
     }
 }

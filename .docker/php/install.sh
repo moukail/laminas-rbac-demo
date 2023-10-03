@@ -3,29 +3,26 @@ rm -rf ./*
 echo "-------------------------------------------------------------------"
 echo "-             Laminas MVC Skeleton Application                    -"
 echo "-------------------------------------------------------------------"
-composer create-project -s dev laminas/laminas-mvc-skeleton --no-interaction web
+composer create-project -s dev laminas/laminas-mvc-skeleton --no-interaction my_project
 
 echo "-------------------------------------------------------------------"
 echo "-                   require packages                              -"
 echo "-------------------------------------------------------------------"
-cd ./web
-
-#symfony composer config extra.symfony.allow-contrib true
-#symfony composer config allow-plugins.symfony/runtime true
+cd ./my_project
 symfony composer require php:^8.2.0
 
-composer require --no-interaction laminas/laminas-cli laminas/laminas-session laminas/laminas-i18n
-composer require --no-interaction doctrine/migrations doctrine/doctrine-orm-module --with-all-dependencies
+composer require --no-interaction laminas/laminas-cli laminas/laminas-session
+composer require --no-interaction doctrine/doctrine-orm-module --with-all-dependencies
+
 echo "-------------------------------------------------------------------"
 echo "-               require dev packages                              -"
 echo "-------------------------------------------------------------------"
-
-symfony composer require --dev --no-interaction laminas/laminas-developer-tools doctrine/data-fixtures
+symfony composer require --dev --no-interaction laminas/laminas-developer-tools
 
 rm -rf .git
 cd ..
 
-chmod -R a+rw web
+chmod -R a+rw my_project
 
-rsync -a web/ ./
-rm -rf web
+rsync -a my_project/ ./
+rm -rf my_project

@@ -1,0 +1,52 @@
+<style>
+    /* Custom page CSS
+-------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
+
+    main > .container {
+        padding: 60px 15px 0;
+    }
+
+    .form-check {
+        width: 250px;
+        float:left;
+    }
+</style>
+
+<?= $this->partial('partial_header.phtml'); ?>
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <h2 class="mt-5">Create new Role</h2>
+
+        <?php
+        // Display form errors, if any
+        if ($form->getMessages()) {
+            echo $this->formMessages($form);
+        }
+        ?>
+
+        <?php
+        // Render the form
+        $form->setAttribute('action', $this->url('role-add'));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        ?>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formInput($form->get('name')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('permissions')); ?>
+            <?= $this->formMultiCheckbox($form->get('permissions')); ?>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formSubmit($form->get('submit')); ?>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</main>
